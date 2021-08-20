@@ -1,4 +1,5 @@
 require 'fastbound-ruby/api'
+require 'fastbound-ruby/account'
 
 module FastBound
   class Client < Base
@@ -12,6 +13,10 @@ module FastBound
 
       self.account_number = options[:account_number]
       self.api_key = options[:api_key]
+    end
+
+    def account
+      @account ||= FastBound::Account.new(self)
     end
 
   end
