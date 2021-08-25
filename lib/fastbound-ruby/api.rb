@@ -22,6 +22,18 @@ module FastBound
       submit_request(client, request, data)
     end
 
+    def put_request(client, endpoint, data = {})
+      request = Net::HTTP::Put.new(request_url(client, endpoint))
+
+      submit_request(client, request, data)
+    end
+
+    def delete_request(client, endpoint)
+      request = Net::HTTP::Delete.new(request_url(client, endpoint))
+
+      submit_request(client, request)
+    end
+
     def post_file_request(client, endpoint, file_data)
       request = Net::HTTP::Post.new(request_url(client, endpoint))
 
