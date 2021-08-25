@@ -1,5 +1,6 @@
 require 'fastbound-ruby/api'
 require 'fastbound-ruby/account'
+require 'fastbound-ruby/item'
 
 module FastBound
   class Client < Base
@@ -17,6 +18,10 @@ module FastBound
 
     def account
       @account ||= FastBound::Account.new(self)
+    end
+
+    def item
+      @item ||= FastBound::Item.new(self)
     end
 
   end
