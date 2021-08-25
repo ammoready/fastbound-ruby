@@ -8,11 +8,11 @@ module FastBound
 
       case @response
       when Net::HTTPUnauthorized
-        FastBound::Error::NotAuthorized.new(@response.body)
+        raise FastBound::Error::NotAuthorized.new(@response.body)
       when Net::HTTPNotFound
-        FastBound::Error::NotFound.new(@response.body)
+        raise FastBound::Error::NotFound.new(@response.body)
       when Net::HTTPNoContent
-        FastBound::Error::NoContent.new(@response.body)
+        raise FastBound::Error::NoContent.new(@response.body)
       when Net::HTTPOK, Net::HTTPSuccess
         self.success = true
         _data = (JSON.parse(@response.body) if @response.body.present?)
