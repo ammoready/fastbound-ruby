@@ -10,41 +10,41 @@ module FastBound
       reqired:   %i( file_type file_contents ).freeze,
     }
 
-    def get_request(client, endpoint, headers = {})
+    def get_request(client, endpoint)
       request = Net::HTTP::Get.new(request_url(client, endpoint))
 
-      submit_request(client, request, {}, headers)
+      submit_request(client, request)
     end
 
-    def post_request(client, endpoint, data = {}, headers = {})
+    def post_request(client, endpoint, data = {})
       request = Net::HTTP::Post.new(request_url(client, endpoint))
 
-      submit_request(client, request, data, headers)
+      submit_request(client, request, data)
     end
 
-    def post_file_request(client, endpoint, file_data, headers = {})
+    def post_file_request(client, endpoint, file_data)
       request = Net::HTTP::Post.new(request_url(client, endpoint))
 
-      submit_file_request(client, request, file_data, headers)
+      submit_file_request(client, request, file_data)
     end
 
     private
 
-    def submit_request(client, request, data, headers)
-      set_request_headers(client, request, headers)
+    def submit_request(client, request, data = {})
+      set_request_headers(client, request)
 
       request.body = data.is_a?(Hash) ? data.to_json : data
 
       process_request(request)
     end
 
-    def submit_file_request(client, request, file_data, headers)
+    def submit_file_request(client, request, file_data)
       boundary = ::SecureRandom.hex(15)
 
       headers.merge!(content_type_header("multipart/form-data; boundary=#{boundary}"))
 
       build_multipart_request_body(request, file_data, boundary)
-      set_request_headers(client, request, headers)
+      set_request_headers(client, request)
       process_request(request)
     end
 
@@ -75,11 +75,9 @@ module FastBound
       request.body = body.join
     end
 
-    def set_request_headers(client, request, headers)
+    def set_request_headers(client, request)
       request['User-Agent'] = USER_AGENT
       request['Authorization'] = ['Basic', Base64.strict_encode64(client.api_key + ':')].join(' ')
-
-      headers.each { |header, value| request[header] = value }
     end
 
     def request_url(client, endpoint)
