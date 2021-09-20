@@ -90,6 +90,7 @@ module FastBound
     def set_request_headers(client, request)
       request['User-Agent'] = USER_AGENT
       request['Authorization'] = ['Basic', Base64.strict_encode64(client.api_key + ':')].join(' ')
+      request['X-AuditUser'] = client.account_email
     end
 
     def request_url(client, endpoint)
