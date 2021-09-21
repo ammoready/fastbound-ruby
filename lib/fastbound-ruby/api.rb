@@ -104,5 +104,9 @@ module FastBound
       permitted_data.deep_transform_keys { |k| k.to_s.camelize(:lower) }
     end
 
+    def convert_params_to_request_query(params)
+      params&.map { |k, v| [k.to_s.camelize(:lower), v].join('=') }&.join('&')
+    end
+
   end
 end
