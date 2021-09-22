@@ -1,5 +1,6 @@
 require 'fastbound-ruby/api'
 require 'fastbound-ruby/account'
+require 'fastbound-ruby/acquisition'
 require 'fastbound-ruby/attachment'
 require 'fastbound-ruby/contact'
 require 'fastbound-ruby/item'
@@ -21,6 +22,10 @@ module FastBound
 
     def account
       @account ||= FastBound::Account.new(self)
+    end
+
+    def acquisition
+      @acquisition ||= FastBound::Acquisition.new(self)
     end
 
     def attachment

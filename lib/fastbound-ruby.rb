@@ -3,6 +3,7 @@ require 'fastbound-ruby/version'
 
 require 'fastbound-ruby/api'
 require 'fastbound-ruby/account'
+require 'fastbound-ruby/acquisition'
 require 'fastbound-ruby/attachment'
 require 'fastbound-ruby/client'
 require 'fastbound-ruby/contact'
