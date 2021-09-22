@@ -6,13 +6,13 @@ module FastBound
     include FastBound::API
 
     EDIT_ATTRS = %i(
-      externalId itemNumber doNotDispose note manufacturer importer countryOfManufacture serial model caliber
-      type barrelLength totalLength condition cost price mpn upc location locationVerifiedUtc acquire_Date
-      acquisitionType acquire_PurchaseOrderNumber acquire_InvoiceNumber acquire_ShipmentTrackingNumber
-      dispose_Date dispositionType dispose_PurchaseOrderNumber dispose_InvoiceNumber dispose_ShipmentTrackingNumber
-      ttsn otsn submissionDate theftLoss_DiscoveredDate theftLoss_Type theftLoss_ATFIssuedIncidentNumber
-      theftLoss_PoliceIncidentNumber destroyed_Date destroyed_Description destroyed_Witness1 destroyed_Witness2
-      lightspeedSystemID lightspeedSerialID lightspeedSaleID
+      external_id item_number do_not_dispose note manufacturer importer country_of_manufacture serial model caliber type
+      barrel_length total_length condition cost price mpn upc location location_verified_utc ttsn otsn submission_date
+      acquisition_type acquire_date acquire_purchase_order_number acquire_invoice_number acquire_shipment_tracking_number
+      disposition_type dispose_date dispose_purchase_order_number dispose_invoice_number dispose_shipment_tracking_number
+      theft_loss_discovered_date theft_loss_type theft_loss_atf_issued_incident_number theft_loss_police_incident_number
+      destroyed_date destroyed_description destroyed_witness_1 destroyed_witness_2
+      lightspeed_system_id lightspeed_serial_id lightspeed_sale_id
     ).freeze
 
     ENDPOINTS = {

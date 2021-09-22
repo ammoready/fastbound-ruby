@@ -98,10 +98,19 @@ module FastBound
     end
 
     def standardize_body_data(submitted_data, permitted_data_attrs)
+      protected_attr_prefixes = %w( acquire destroyed dispose location theftLoss )
       _submitted_data = submitted_data.deep_transform_keys(&:to_sym)
       permitted_data = (_submitted_data.select! { |k, v| permitted_data_attrs.include?(k) } || _submitted_data)
 
-      permitted_data.deep_transform_keys { |k| k.to_s.camelize(:lower) }
+      permitted_data.deep_transform_keys do |k|
+        transformed_key = k.to_s.camelize(:lower)
+
+        if index_for_underscore = protected_attr_prefixes.find { |x| transformed_key.index(x) == 0 }&.length
+          transformed_key.insert(index_for_underscore, '_')
+        else
+          transformed_key
+        end
+      end
     end
 
     def convert_params_to_request_query(params)
