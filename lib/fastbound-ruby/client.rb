@@ -3,6 +3,7 @@ require 'fastbound-ruby/account'
 require 'fastbound-ruby/acquisition'
 require 'fastbound-ruby/attachment'
 require 'fastbound-ruby/contact'
+require 'fastbound-ruby/disposition'
 require 'fastbound-ruby/item'
 
 module FastBound
@@ -34,6 +35,10 @@ module FastBound
 
     def contact
       @contact ||= FastBound::Contact.new(self)
+    end
+
+    def disposition
+      @disposition ||= FastBound::Disposition.new(self)
     end
 
     def item
