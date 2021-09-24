@@ -11,6 +11,7 @@ require 'fastbound-ruby/disposition'
 require 'fastbound-ruby/error'
 require 'fastbound-ruby/item'
 require 'fastbound-ruby/response'
+require 'fastbound-ruby/smart_list'
 
 module FastBound
 end

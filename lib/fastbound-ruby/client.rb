@@ -5,6 +5,7 @@ require 'fastbound-ruby/attachment'
 require 'fastbound-ruby/contact'
 require 'fastbound-ruby/disposition'
 require 'fastbound-ruby/item'
+require 'fastbound-ruby/smart_list'
 
 module FastBound
   class Client < Base
@@ -43,6 +44,10 @@ module FastBound
 
     def item
       @item ||= FastBound::Item.new(self)
+    end
+
+    def smart_list
+      @smart_list ||= FastBound::SmartList.new(self)
     end
 
   end
