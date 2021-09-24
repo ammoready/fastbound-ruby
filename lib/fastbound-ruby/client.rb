@@ -6,6 +6,7 @@ require 'fastbound-ruby/contact'
 require 'fastbound-ruby/disposition'
 require 'fastbound-ruby/item'
 require 'fastbound-ruby/smart_list'
+require 'fastbound-ruby/webhook'
 
 module FastBound
   class Client < Base
@@ -48,6 +49,10 @@ module FastBound
 
     def smart_list
       @smart_list ||= FastBound::SmartList.new(self)
+    end
+
+    def webhook
+      @webhook ||= FastBound::Webhook.new(self)
     end
 
   end

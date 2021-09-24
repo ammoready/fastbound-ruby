@@ -12,6 +12,7 @@ require 'fastbound-ruby/error'
 require 'fastbound-ruby/item'
 require 'fastbound-ruby/response'
 require 'fastbound-ruby/smart_list'
+require 'fastbound-ruby/webhook'
 
 module FastBound
 end
