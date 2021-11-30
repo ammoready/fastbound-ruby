@@ -33,8 +33,8 @@ module FastBound
       @client = client
     end
 
-    def list
-      endpoint = ENDPOINTS[:list]
+    def list(params = {})
+      endpoint = ENDPOINTS[:list] % convert_params_to_request_query(params)
 
       get_request(@client, endpoint)
     end
