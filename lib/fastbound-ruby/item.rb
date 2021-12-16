@@ -19,7 +19,7 @@ module FastBound
     }
 
     ENDPOINTS = {
-      list:                 "items".freeze,
+      list:                 "items?%s".freeze,
       fetch:                "items/%s".freeze,
       edit:                 "items/%s".freeze,
       delete:               "items/%s".freeze,
