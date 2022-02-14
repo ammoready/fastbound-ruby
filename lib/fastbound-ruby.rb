@@ -15,4 +15,25 @@ require 'fastbound-ruby/smart_list'
 require 'fastbound-ruby/webhook'
 
 module FastBound
+  class << self
+    attr_accessor :config
+  end
+
+  def self.config
+    @config ||= Configuration.new
+  end
+
+  def self.configure
+    yield(config)
+  end
+
+  class Configuration
+    attr_accessor :full_debug
+
+    alias :full_debug? :full_debug
+
+    def initialize
+      @full_debug ||= false
+    end
+  end
 end
