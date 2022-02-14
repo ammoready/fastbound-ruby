@@ -23,7 +23,7 @@ module FastBound
     end
 
     def create(webhook_data)
-      requires!(webhook_data, CREATE_AND_EDIT_ATTRS[:required])
+      requires!(webhook_data, *CREATE_AND_EDIT_ATTRS[:required])
 
       endpoint = ENDPOINTS[:create]
       webhook_data = standardize_body_data(webhook_data, CREATE_AND_EDIT_ATTRS[:permitted])

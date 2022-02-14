@@ -49,7 +49,7 @@ module FastBound
     end
 
     def create(contact_data)
-      requires!(contact_data, CREATE_AND_EDIT_ATTRS[:required])
+      requires!(contact_data, *CREATE_AND_EDIT_ATTRS[:required])
 
       endpoint = ENDPOINTS[:create]
       contact_data = standardize_body_data(contact_data, CREATE_AND_EDIT_ATTRS[:permitted])
@@ -83,7 +83,7 @@ module FastBound
     end
 
     def merge(merge_data)
-      requires!(merge_data, MERGE_ATTRS[:required])
+      requires!(merge_data, *MERGE_ATTRS[:required])
 
       endpoint = ENDPOINTS[:merge]
       merge_data = standardize_body_data(merge_data, MERGE_ATTRS[:permitted])
@@ -92,7 +92,7 @@ module FastBound
     end
 
     def create_license(contact_id, license_data)
-      requires!(license_data, CREATE_AND_EDIT_LICENSE_ATTRS[:required])
+      requires!(license_data, *CREATE_AND_EDIT_LICENSE_ATTRS[:required])
 
       endpoint = ENDPOINTS[:create_license] % contact_id
       license_data = standardize_body_data(license_data, CREATE_AND_EDIT_LICENSE_ATTRS[:permitted])

@@ -89,7 +89,7 @@ module FastBound
     end
 
     def create(disposition_data)
-      requires!(disposition_data, CREATE_ATTRS[:required])
+      requires!(disposition_data, *CREATE_ATTRS[:required])
 
       endpoint = ENDPOINTS[:create]
       disposition_data = standardize_body_data(disposition_data, CREATE_ATTRS[:permitted])
@@ -98,7 +98,7 @@ module FastBound
     end
 
     def create_as_nfa(disposition_data)
-      requires!(disposition_data, CREATE_AS_NFA_ATTRS[:required])
+      requires!(disposition_data, *CREATE_AS_NFA_ATTRS[:required])
 
       endpoint = ENDPOINTS[:create_as_nfa]
       disposition_data = standardize_body_data(disposition_data, CREATE_AS_NFA_ATTRS[:permitted])
@@ -153,7 +153,7 @@ module FastBound
     end
 
     def create_and_commit(disposition_data, items_data, contact_data, commit_data = {})
-      requires!(contact_data, Contact::CREATE_AND_EDIT_ATTRS[:required])
+      requires!(contact_data, *Contact::CREATE_AND_EDIT_ATTRS[:required])
       items_data.each { |item| requires!(item, :id) }
 
       endpoint = ENDPOINTS[:create_and_commit]

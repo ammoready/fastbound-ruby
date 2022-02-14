@@ -40,7 +40,7 @@ module FastBound
     end
 
     def create(acquisition_data)
-      requires!(acquisition_data, CREATE_AND_EDIT_ATTRS[:required])
+      requires!(acquisition_data, *CREATE_AND_EDIT_ATTRS[:required])
 
       endpoint = ENDPOINTS[:create]
       acquisition_data = standardize_body_data(acquisition_data, CREATE_AND_EDIT_ATTRS[:permitted])
@@ -80,9 +80,9 @@ module FastBound
     end
 
     def create_and_commit(acquisition_data, item_data, contact_data)
-      requires!(acquisition_data, CREATE_AND_EDIT_ATTRS[:required])
-      requires!(item_data, Item::CREATE_AND_EDIT_ATTRS[:required])
-      requires!(contact_data, Contact::CREATE_AND_EDIT_ATTRS[:required])
+      requires!(acquisition_data, *CREATE_AND_EDIT_ATTRS[:required])
+      requires!(item_data, *Item::CREATE_AND_EDIT_ATTRS[:required])
+      requires!(contact_data, *Contact::CREATE_AND_EDIT_ATTRS[:required])
 
       endpoint = ENDPOINTS[:create_and_commit]
       acquisition_data = standardize_body_data(acquisition_data, CREATE_AND_EDIT_ATTRS[:permitted])
@@ -97,7 +97,7 @@ module FastBound
     end
 
     def create_item(acquisition_id, item_data)
-      requires!(item_data, Item::CREATE_AND_EDIT_ATTRS[:required])
+      requires!(item_data, *Item::CREATE_AND_EDIT_ATTRS[:required])
 
       endpoint = ENDPOINTS[:create_item] % acquisition_id
       item_data = standardize_body_data(item_data, Item::CREATE_AND_EDIT_ATTRS[:permitted])
