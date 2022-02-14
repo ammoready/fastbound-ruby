@@ -24,6 +24,10 @@ module FastBound
           _data.map(&:deep_symbolize_keys)
         end
       else
+        if FastBound.config.full_debug?
+          puts "-- DEBUG: #{self}: RequestError: #{@response.inspect}"
+        end
+
         raise FastBound::Error::RequestError.new(@response.body)
       end
     end
