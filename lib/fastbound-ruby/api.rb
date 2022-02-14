@@ -62,8 +62,9 @@ module FastBound
 
     def process_request(request)
       uri = URI(request.path)
-      http = Net::HTTP.new(uri.host, uri.port, use_ssl: true)
+      http = Net::HTTP.new(uri.host, uri.port)
 
+      http.use_ssl = true
       http.set_debug_output($stdout) if FastBound.config.full_debug?
 
       response = http.start { |_http| _http.request(request) }
