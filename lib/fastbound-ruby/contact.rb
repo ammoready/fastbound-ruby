@@ -5,14 +5,11 @@ module FastBound
 
     include FastBound::API
 
-    CREATE_AND_EDIT_ATTRS = {
-      permitted: %i(
-        external_id ffl_number ffl_expires lookup_ffl license_name trade_name sotein sot_class business_type
-        organization_name first_name middle_name last_name premise_address_1 premise_address_2 premise_city
-        premise_county premise_state premise_zip_code premise_country phone_number fax email_address
-      ).freeze,
-      required:  %i( ffl_number ffl_expires premise_address_1 premise_city premise_state premise_zip_code ).freeze
-    }
+    CREATE_AND_EDIT_ATTRS = %i(
+      external_id ffl_number ffl_expires lookup_ffl license_name trade_name sotein sot_class business_type
+      organization_name first_name middle_name last_name premise_address_1 premise_address_2 premise_city
+      premise_county premise_state premise_zip_code premise_country phone_number fax email_address
+    ).freeze
 
     CREATE_AND_EDIT_LICENSE_ATTRS = {
       permitted: %i( type number expiration copy_on_file ).freeze,
@@ -49,17 +46,15 @@ module FastBound
     end
 
     def create(contact_data)
-      requires!(contact_data, *CREATE_AND_EDIT_ATTRS[:required])
-
       endpoint = ENDPOINTS[:create]
-      contact_data = standardize_body_data(contact_data, CREATE_AND_EDIT_ATTRS[:permitted])
+      contact_data = standardize_body_data(contact_data, CREATE_AND_EDIT_ATTRS)
 
       post_request(@client, endpoint, contact_data)
     end
 
     def edit(contact_id, contact_data)
       endpoint = ENDPOINTS[:edit] % contact_id
-      contact_data = standardize_body_data(contact_data, CREATE_AND_EDIT_ATTRS[:permitted])
+      contact_data = standardize_body_data(contact_data, CREATE_AND_EDIT_ATTRS)
 
       put_request(@client, endpoint, contact_data)
     end

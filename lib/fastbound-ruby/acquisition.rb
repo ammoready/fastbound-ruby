@@ -82,12 +82,11 @@ module FastBound
     def create_and_commit(acquisition_data, item_data, contact_data)
       requires!(acquisition_data, *CREATE_AND_EDIT_ATTRS[:required])
       requires!(item_data, *Item::CREATE_AND_EDIT_ATTRS[:required])
-      requires!(contact_data, *Contact::CREATE_AND_EDIT_ATTRS[:required])
 
       endpoint = ENDPOINTS[:create_and_commit]
       acquisition_data = standardize_body_data(acquisition_data, CREATE_AND_EDIT_ATTRS[:permitted])
       item_data = standardize_body_data(item_data, Item::CREATE_AND_EDIT_ATTRS[:permitted])
-      contact_data = standardize_body_data(contact_data, Contact::CREATE_AND_EDIT_ATTRS[:permitted])
+      contact_data = standardize_body_data(contact_data, Contact::CREATE_AND_EDIT_ATTRS)
       request_data = acquisition_data.merge(
         contact: contact_data,
         items: [item_data]

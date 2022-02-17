@@ -159,7 +159,7 @@ module FastBound
       endpoint = ENDPOINTS[:create_and_commit]
       disposition_data = standardize_body_data(disposition_data, EDIT_AND_CREATE_COMMIT_ATTRS)
       items_data = items_data.map { |item| standardize_body_data(item, ITEM_ATTRS[:add]) }
-      contact_data = standardize_body_data(contact_data, Contact::CREATE_AND_EDIT_ATTRS[:permitted])
+      contact_data = standardize_body_data(contact_data, Contact::CREATE_AND_EDIT_ATTRS)
       request_data = disposition_data.merge(
         contact: contact_data,
         items: items_data,
