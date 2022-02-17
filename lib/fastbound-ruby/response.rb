@@ -28,7 +28,7 @@ module FastBound
           puts "-- DEBUG: #{self}: RequestError: #{@response.inspect}"
         end
 
-        raise FastBound::Error::RequestError.new(@response.body)
+        raise FastBound::Error::RequestError.new([@response.body, @response.message].reject(&:blank?).join(" | "))
       end
     end
 
