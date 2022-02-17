@@ -13,38 +13,41 @@ module FastBound
     def get_request(client, endpoint)
       request = Net::HTTP::Get.new(request_url(client, endpoint))
 
+      set_request_headers(client, request)
       submit_request(client, request)
     end
 
     def post_request(client, endpoint, data = {})
       request = Net::HTTP::Post.new(request_url(client, endpoint))
 
+      set_request_headers(client, request, 'application/json')
       submit_request(client, request, data)
     end
 
     def put_request(client, endpoint, data = {})
       request = Net::HTTP::Put.new(request_url(client, endpoint))
 
+      set_request_headers(client, request, 'application/json')
       submit_request(client, request, data)
     end
 
     def delete_request(client, endpoint)
       request = Net::HTTP::Delete.new(request_url(client, endpoint))
 
+      set_request_headers(client, request)
       submit_request(client, request)
     end
 
     def post_file_request(client, endpoint, file_data)
       request = Net::HTTP::Post.new(request_url(client, endpoint))
 
+      set_request_headers(client, request)
       submit_file_request(client, request, file_data)
     end
 
     private
 
     def submit_request(client, request, data = {})
-      set_request_headers(client, request)
-
       request.body = data.is_a?(Hash) ? data.to_json : data
 
       process_request(request)
@@ -56,7 +59,6 @@ module FastBound
       headers.merge!(content_type_header("multipart/form-data; boundary=#{boundary}"))
 
       build_multipart_request_body(request, file_data, boundary)
-      set_request_headers(client, request)
       process_request(request)
     end
 
@@ -89,10 +91,11 @@ module FastBound
       request.body = body.join
     end
 
-    def set_request_headers(client, request)
+    def set_request_headers(client, request, content_type = nil)
       request['User-Agent'] = USER_AGENT
       request['Authorization'] = ['Basic', Base64.strict_encode64(client.api_key + ':')].join(' ')
       request['X-AuditUser'] = client.account_email
+      request['Content-Type'] = content_type if content_type.present?
     end
 
     def request_url(client, endpoint)
