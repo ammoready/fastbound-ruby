@@ -152,8 +152,7 @@ module FastBound
       post_request(@client, endpoint, commit_data)
     end
 
-    def create_and_commit(disposition_data, items_data, contact_data, commit_data = {})
-      requires!(contact_data, *Contact::CREATE_AND_EDIT_ATTRS[:required])
+    def create_and_commit(disposition_data, items_data, contact_data = {}, commit_data = {})
       items_data.each { |item| requires!(item, :id) }
 
       endpoint = ENDPOINTS[:create_and_commit]
@@ -164,7 +163,7 @@ module FastBound
         contact: contact_data,
         items: items_data,
         manufacturingChanges: commit_data
-      )
+      ).compact
 
       post_request(@client, endpoint, request_data)
     end
