@@ -152,7 +152,7 @@ module FastBound
       post_request(@client, endpoint, commit_data)
     end
 
-    def create_and_commit(disposition_data, items_data, contact_data = {}, commit_data = {})
+    def create_and_commit(disposition_data, items_data, contact_data = {}, commit_data = nil)
       items_data.each { |item| requires!(item, :id) }
 
       endpoint = ENDPOINTS[:create_and_commit]
