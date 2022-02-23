@@ -12,7 +12,7 @@ module FastBound
       when Net::HTTPNotFound
         raise FastBound::Error::NotFound.new(@response.body)
       when Net::HTTPNoContent
-        raise FastBound::Error::NoContent.new(@response.body)
+        self.success = true
       when Net::HTTPOK, Net::HTTPSuccess
         self.success = true
         _data = (JSON.parse(@response.body) if @response.body.present?)
