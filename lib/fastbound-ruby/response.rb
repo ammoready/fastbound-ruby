@@ -29,7 +29,7 @@ module FastBound
         end
 
         error_message = begin
-          JSON.parse(@response.body)['errors'].map { |error| error['message'] }.join('. ')
+          JSON.parse(@response.body)['errors'].map { |error| error['message'].chomp('.') }.join('. ')
         rescue
           [@response.message, @response.body].reject(&:blank?).join(" | ")
         end
