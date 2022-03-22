@@ -28,7 +28,13 @@ module FastBound
           puts "-- DEBUG: #{self}: RequestError: #{@response.inspect}"
         end
 
-        raise FastBound::Error::RequestError.new([@response.body, @response.message].reject(&:blank?).join(" | "))
+        error_message = begin
+          JSON.parse(@response.body)['errors'].map { |error| error['message'] }.join('. ')
+        rescue
+          [@response.message, @response.body].reject(&:blank?).join(" | ")
+        end
+
+        raise FastBound::Error::RequestError.new(error_message)
       end
     end
 
