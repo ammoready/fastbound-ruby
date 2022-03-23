@@ -11,9 +11,7 @@ module FastBound
         raise FastBound::Error::NotAuthorized.new(@response.body)
       when Net::HTTPNotFound
         raise FastBound::Error::NotFound.new(@response.body)
-      when Net::HTTPNoContent
-        self.success = true
-      when Net::HTTPOK, Net::HTTPSuccess
+      when Net::HTTPOK, Net::HTTPSuccess, Net::HTTPNoContent, Net::HTTPCreated
         self.success = true
         _data = (JSON.parse(@response.body) if @response.body.present?)
 
